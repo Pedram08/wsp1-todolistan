@@ -37,7 +37,12 @@ class App < Sinatra::Base
       name = params[:name]
       description = params[:description]
       db.execute('INSERT INTO todos (name, description) VALUES (?, ?)', [name, description])
-      redirect '/todos'
+      redirect ('/todos')
+    end
+
+    post '/todo/:id/delete' do | id |
+      db.execute("DELETE FROM todos WHERE id =?", id)
+      redirect("/todos")
     end
 
 
